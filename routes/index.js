@@ -2,6 +2,8 @@
 // Main routes file
 const cheerio = require('cheerio');
 const rp = require('request-promise');
+const weekdays = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
+let $;
 const options = {
   uri: `https://www.stw-bremen.de/de/essen-trinken/uni-mensa`,
   transform: (body) => {
@@ -10,24 +12,24 @@ const options = {
 };
 
 module.exports = (app) => {
+  // Get today route for now
   app.get('/', async (req, res) => {
-    let $ = await fetch();
-    //console.log($('.food-plan:nth-of-type(1) .food-category:first-of-type .field-name-field-description').children('sup').text());
-    let essen1 = $('.food-plan:nth-of-type(1) .food-category:nth-of-type(1) .field-name-field-description').contents().filter(function() {
-      return this.type === 'text';
-    }).text();
-    console.log(essen1);
-    let essen2 = $('.food-plan:nth-of-type(1) .food-category:nth-of-type(2) .field-name-field-description').contents().filter(function() {
-      return this.type === 'text';
-    }).text();
-    console.log(essen2)
-    let veg = $('.food-plan:nth-of-type(1) .food-category:nth-of-type(3) .field-name-field-description').contents().filter(function() {
-      return this.type === 'text';
-    }).text();
-    res.render('index', {essen1: essen1, essen2: essen2, veg: veg});
+    $ = await fetch();
+    let day = {
+      today: weekdays[new Date().getDay()],
+      essen1: getMeals(1, 1),
+      essen2: getMeals(1, 2),
+      veg: getMeals(1, 3)
+    }
+    res.status(200).send(day);
   })
 }
 
+const getMeals = (day, meal) =>  {
+  return $(`.food-plan:nth-of-type(${day}) .food-category:nth-of-type(${meal}) .field-name-field-description`).contents().filter(function() {
+    return this.type === 'text';
+  }).text();
+}
 
 const fetch = async (url) => {
   try {

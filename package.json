@@ -1,5 +1,5 @@
 {
-  "name": "MensaEatzReader",
+  "name": "Mensa-reader-bremen",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -9,9 +9,7 @@
     "body-parser": "~1.17.1",
     "cheerio": "latest",
     "dotenv": "^4.0.0",
-    "ejs": "^2.5.7",
     "express": "~4.15.2",
-    "got": "^8.0.3",
     "request": "latest",
     "request-promise": "^4.2.2"
   },

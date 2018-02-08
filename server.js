@@ -5,12 +5,12 @@ const express = require('express');
 const bodyParser = require('body-parser');
 
 const app = express();
-const port = 8080;
+
 
 
 // Settings
-app.set('view engine', 'ejs');
-app.set('views', __dirname + '/views');
+const port = 8080;
+app.use(bodyParser.json());
 
 // require routes
 require('./routes')(app, {});
