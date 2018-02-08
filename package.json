@@ -1,0 +1,24 @@
+{
+  "name": "MensaEatzReader",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "dev": "nodemon server.js"
+  },
+  "dependencies": {
+    "body-parser": "~1.17.1",
+    "cheerio": "latest",
+    "dotenv": "^4.0.0",
+    "ejs": "^2.5.7",
+    "express": "~4.15.2",
+    "got": "^8.0.3",
+    "request": "latest",
+    "request-promise": "^4.2.2"
+  },
+  "devDependencies": {
+    "eslint": "^4.10.0",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-plugin-import": "^2.8.0",
+    "nodemon": "^1.12.1"
+  }
+}
