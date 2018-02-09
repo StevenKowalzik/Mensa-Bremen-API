@@ -33,8 +33,7 @@ const getMeals = (day, meal) =>  {
 
 const fetch = async (url) => {
   try {
-    const response = await rp(options);
-    return response;
+    return await rp(options);
   } catch (e) {
     console.log(e);
   }
