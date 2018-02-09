@@ -19,7 +19,13 @@ module.exports = (app) => {
       today: weekdays[new Date().getDay()],
       essen1: getMeals(1, 1),
       essen2: getMeals(1, 2),
-      veg: getMeals(1, 3)
+      vegetarisch: getMeals(1, 3),
+      pfannewokco: getMeals(1, 4),
+      veganes: getMeals(1, 5),
+      auflaeufegraetins: getMeals(1, 6),
+      pastasuppenco: getMeals(1, 7),
+      salatbar: getMeals(1, 8),
+      beilagen: getMeals(1, 9)
     }
     res.status(200).send(day);
   })
@@ -28,7 +34,7 @@ module.exports = (app) => {
 const getMeals = (day, meal) =>  {
   return $(`.food-plan:nth-of-type(${day}) .food-category:nth-of-type(${meal}) .field-name-field-description`).contents().filter(function() {
     return this.type === 'text';
-  }).text();
+  }).text().replace(/\n/g, ' ').replace('  ', ' '); //Das ist unschoen, geht das anders?
 }
 
 const fetch = async (url) => {
