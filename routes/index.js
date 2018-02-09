@@ -15,8 +15,8 @@ module.exports = (app) => {
   // Get today route for now
   app.get('/', async (req, res) => {
     $ = await fetch();
-    let day = {
-      today: weekdays[new Date().getDay()],
+    let plan = {
+      day: weekdays[new Date().getDay()],
       essen1: getMeals(1, 1),
       essen2: getMeals(1, 2),
       vegetarisch: getMeals(1, 3),
@@ -27,7 +27,7 @@ module.exports = (app) => {
       salatbar: getMeals(1, 8),
       beilagen: getMeals(1, 9)
     }
-    res.status(200).send(day);
+    res.status(200).send(plan);
   })
 }
 
