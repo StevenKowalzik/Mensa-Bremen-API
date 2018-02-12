@@ -6,20 +6,17 @@ const bodyParser = require('body-parser');
 
 const app = express();
 
-
-
 // Settings
 const port = 8080;
 app.use(bodyParser.json());
 
 // require routes
-require('./routes')(app, {});
+require('./routes')(app);
 
 // Start server
 app.listen(port, () => {
   console.log(`Server running on port: ${port}`);
 });
-
 
 // 404 Error
 app.use((req, res) => {

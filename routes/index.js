@@ -1,22 +1,16 @@
 // routes/index.js
 // Main routes file
 const cheerio = require('cheerio');
-const rp = require('request-promise');
-const weekdays = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
+const weekdays = ['sonntag', 'montag', 'dienstag', 'mittwoch', 'donnerstag', 'freitag', 'samstag'];
+const fetch = require('./../utils/fetch');
 let $;
-const options = {
-  uri: `https://www.stw-bremen.de/de/essen-trinken/uni-mensa`,
-  transform: (body) => {
-    return cheerio.load(body);
-  }
-};
 
 module.exports = (app) => {
   // Get today route for now
   app.get('/', async (req, res) => {
     $ = await fetch();
     let plan = {
-      day: weekdays[new Date().getDay()],
+      day: getDay(),
       essen1: getMeals(1, 1),
       essen2: getMeals(1, 2),
       vegetarisch: getMeals(1, 3),
@@ -34,13 +28,7 @@ module.exports = (app) => {
 const getMeals = (day, meal) =>  {
   return $(`.food-plan:nth-of-type(${day}) .food-category:nth-of-type(${meal}) .field-name-field-description`).contents().filter(function() {
     return this.type === 'text';
-  }).text().replace(/\n/g, ' ').replace('  ', ' '); //Das ist unschoen, geht das anders?
+  }).text().replace(/\n/g, ' ').replace('  ', ' ');
 }
 
-const fetch = async (url) => {
-  try {
-    return await rp(options);
-  } catch (e) {
-    console.log(e);
-  }
-}
+const getDay = () => new Date().getDay() != 0 || new Date().getDay() != 6 ? weekdays[new Date().getDay()] : weekdays[1];
