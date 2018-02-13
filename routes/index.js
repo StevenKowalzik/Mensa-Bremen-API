@@ -23,7 +23,29 @@ module.exports = (app) => {
     }
     res.status(200).send(plan);
   })
+
+  app.get('/:tag', async (req, res) => {
+    if (req.params.tag < 1 && req.params.tag > 5)
+      return res.status(301).send('Das ist kein valider Endpunkt');
+    $ = await fetch();
+    console.log((new Date().getDay() + Number(req.params.tag)) % 6)
+    let plan = {
+      day: getDay(Number(req.params.tag)),
+      essen1: getMeals(req.params.tag, 1),
+      essen2: getMeals(req.params.tag, 2),
+      vegetarisch: getMeals(req.params.tag, 3),
+      pfannewokco: getMeals(req.params.tag, 4),
+      veganes: getMeals(req.params.tag, 5),
+      auflaeufegraetins: getMeals(req.params.tag, 6),
+      pastasuppenco: getMeals(req.params.tag, 7),
+      salatbar: getMeals(req.params.tag, 8),
+      beilagen: getMeals(req.params.tag, 9)
+    }
+    res.status(200).send(plan);
+  })
 }
+
+
 
 const getMeals = (day, meal) =>  {
   return $(`.food-plan:nth-of-type(${day}) .food-category:nth-of-type(${meal}) .field-name-field-description`).contents().filter(function() {
@@ -31,4 +53,13 @@ const getMeals = (day, meal) =>  {
   }).text().replace(/\n/g, ' ').replace('  ', ' ');
 }
 
-const getDay = () => new Date().getDay() != 0 || new Date().getDay() != 6 ? weekdays[new Date().getDay()] : weekdays[1];
+const test = (x = 0) => x;
+
+const getDay = (x = 0) => ((new Date().getDay()+x) % 6 != 0 && (new Date().getDay()+x) % 6 != 6) ? weekdays[(new Date().getDay()+x) % 6] : weekdays[1];
+// const getDay = (x = 0) => {
+//   console.log((new Date().getDay()+x) % 6 != 0| (new Date().getDay()+x) % 6 != 6)
+//   if ((new Date().getDay()+x) % 6 != 0 || (new Date().getDay()+x) % 6 != 6)
+//     return weekdays[(new Date().getDay()+x) % 6]
+//   else
+//     return weekdays[1];
+// }
