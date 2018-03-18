@@ -24,7 +24,7 @@ const getDay = x => $(`.tabs li:nth-of-type(${x}) .tab-title`).text();
 const getDate = x => $(`.tabs li:nth-of-type(${x}) .tab-date`).text();
 
 module.exports = (app) => {
-  app.get('/', async (req, res) => {
+  app.get('/api/', async (req, res) => {
     $ = await fetch();
     let foodPlan = { day: '', date: '', food: [] };
     foodPlan.day = getDay(1);
@@ -35,7 +35,7 @@ module.exports = (app) => {
     res.status(200).send(foodPlan);
   });
 
-  app.get('/:day', async (req, res) => {
+  app.get('/api/:day', async (req, res) => {
     if (req.params.day < 0 && req.params.day > 5) {
       return res.status(404).send('Das ist kein valider Endpunkt');
     }
