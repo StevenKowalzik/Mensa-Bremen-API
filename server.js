@@ -1,4 +1,4 @@
-//Server.js Main Entry Point
+// Server.js Main Entry Point
 
 // Requirements
 const express = require('express');
