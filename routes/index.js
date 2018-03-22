@@ -4,6 +4,8 @@ const fetch = require('./../utils/fetch');
 
 let $;
 
+const domFoodSelector = (day, mealClass) => `.food-plan:nth-of-type(${day}) .food-category:nth-of-type(${mealClass})`;
+
 const getTextOfDom = (selector) => {
   return $(selector).contents().filter(function() {
     return this.type === 'text';
@@ -12,12 +14,24 @@ const getTextOfDom = (selector) => {
 
 const getMeal = (day, mealClass) =>  {
   let mealObj = {};
-  const mealSelector = `.food-plan:nth-of-type(${day}) .food-category:nth-of-type(${mealClass})`;
+  const mealSelector = domFoodSelector(day, mealClass);
   let category = getTextOfDom(`${mealSelector} .category-name`);
   let meal = getTextOfDom(`${mealSelector} .field-name-field-description`);
   mealObj[category] = meal;
   return mealObj;
 };
+
+const getCost = (day, mealClass) => {
+  const mealSelector = domFoodSelector(day, mealClass);
+  let cost = $(`${mealSelector} .field-name-field-price-students`).text();
+  return cost;
+}
+
+const getMealInfo = (day, mealClass) => {
+  let mealInfo = getMeal(day, mealClass)
+  mealInfo.costs = getCost(day, mealClass)
+  return mealInfo
+}
 
 const getDay = x => $(`.tabs li:nth-of-type(${x}) .tab-title`).text();
 
@@ -30,7 +44,7 @@ module.exports = (app) => {
     foodPlan.day = getDay(1);
     foodPlan.date = getDate(1);
     for (let i = 1; i < 10; i++) {
-      foodPlan.food.push(getMeal(1, i));
+      foodPlan.food.push(getMealInfo(1, i));
     }
     res.status(200).send(foodPlan);
   });
@@ -44,7 +58,7 @@ module.exports = (app) => {
     foodPlan.day = getDay(Number(req.params.day) + 1);
     foodPlan.date = getDate(Number(req.params.day) + 1);
     for (let i = 1; i < 10; i++) {
-      foodPlan.food.push(getMeal(Number(req.params.day) + 1, i));
+      foodPlan.food.push(getMealInfo(Number(req.params.day) + 1, i));
     }
     res.status(200).send(foodPlan);
   });
