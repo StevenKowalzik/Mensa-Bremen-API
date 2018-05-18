@@ -1,24 +1,12 @@
-// Server.js Main Entry Point
+import express from 'express'
+import bodyParser from 'body-parser'
+import cors from 'cors';
+import foods from './routes/foods.js'
 
-// Requirements
-const express = require('express');
-const bodyParser = require('body-parser');
+const { PORT = 8080 } = process.env
 
-const app = express();
-
-// Settings
-const port = 8080;
-app.use(bodyParser.json());
-
-// require routes
-require('./routes')(app);
-
-// Start server
-app.listen(port, () => {
-  console.log(`Server running on port: ${port}`);
-});
-
-// 404 Error
-app.use((req, res) => {
-  res.status(404).send({ url: `${req.originalUrl} not found!` });
-});
+express()
+  .use(bodyParser.json())
+  .use(cors({ origin: '*' }))
+  .use(foods)
+  .listen(PORT, () => console.log(`...Server is listening to port ${PORT}`))
