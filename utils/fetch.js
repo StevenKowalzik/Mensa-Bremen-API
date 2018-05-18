@@ -1,5 +1,9 @@
-const rp = require('request-promise');
-const cheerio = require('cheerio');
+// const rp = require('request-promise');
+import rp from 'request-promise';
+import cheerio from 'cheerio';
+import Cache from './cache';
+
+const cache = new Cache();
 
 const options = {
   uri: 'https://www.stw-bremen.de/de/essen-trinken/uni-mensa',
@@ -7,11 +11,16 @@ const options = {
 };
 
 async function fetch() {
+  const cacheData = cache.get();
+  if (cacheData) {
+    return cacheData;
+  }
   try {
-    return await rp(options);
+    const data = await rp(options);
+    cache.set(data);
+    return data;
   } catch (e) {
-    console.log(e);
-    return null;
+    throw new Error('Downloading of the website failed.');
   }
 }
 
