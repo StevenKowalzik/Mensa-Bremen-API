@@ -3,6 +3,14 @@ module.exports = class Scraper {
     this.$ = html;
   }
 
+  getAllDays() {
+    let foodPlan = [];
+    for (var i = 1; i < 6; i++) {
+      foodPlan.push(this.scrapeDay(i));
+    }
+    return foodPlan;
+  }
+
   scrapeDay(day = 1) {
     const foodPlan = { day: '', date: '', food: [] };
     foodPlan.day = this.getDay(day);
@@ -49,5 +57,5 @@ module.exports = class Scraper {
   getDay(x) { return this.$(`.tabs li:nth-of-type(${x}) .tab-title`).text(); }
 
   getDate(x) { return this.$(`.tabs li:nth-of-type(${x}) .tab-date`).text(); }
-  
+
 };

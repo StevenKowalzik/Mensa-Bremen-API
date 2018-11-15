@@ -3,7 +3,7 @@ import bodyParser from 'body-parser';
 import cors from 'cors';
 import foods from './routes/foods';
 
-const { PORT = 8080 } = process.env;
+const { PORT = 8088 } = process.env;
 
 express()
   .use(bodyParser.json())
