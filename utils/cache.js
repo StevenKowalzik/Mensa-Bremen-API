@@ -1,7 +1,5 @@
 module.exports = class Cache {
 
-
-
   constructor() {
     this.data;
     this.lastUpdated;
