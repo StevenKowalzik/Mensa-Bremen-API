@@ -24,4 +24,4 @@ The code has to be refactored, it is messy.
 If you want to Contribute just send a Pull request or write me an email.
 
 ### Demo
-The API is online at _https://mensa.legacymo.de/api/_.
+The API is online at _https://legacymo.de/v2/api/_.
