@@ -50,12 +50,6 @@ module.exports = class Scraper {
     return mealObj;
   }
 
-  // getCost(day, mealClass) {
-  //   const mealSelector = this.domFoodSelector(day, mealClass);
-  //   const cost = this.$(`${mealSelector} .field-name-field-price-students`).text();
-  //   return cost;
-  // }
-
   getMealInfo(day, mealClass) {
     const mealInfo = this.getMeal(day, mealClass);
     //mealInfo.costs = this.getCost(day, mealClass);
