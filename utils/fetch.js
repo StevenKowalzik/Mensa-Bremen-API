@@ -1,4 +1,3 @@
-// const rp = require('request-promise');
 import rp from 'request-promise';
 import cheerio from 'cheerio';
 import Cache from './cache';
