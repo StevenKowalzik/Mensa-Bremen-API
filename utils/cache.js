@@ -1,7 +1,7 @@
 module.exports = class Cache {
   constructor() {
-    this.data;
-    this.lastUpdated;
+    this.data = {};
+    this.lastUpdated = new Date(0);
     this.TTL = 1800000;
   }
 

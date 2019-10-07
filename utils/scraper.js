@@ -1,3 +1,4 @@
+// eslint-disable class-methods-use-this
 module.exports = class Scraper {
   constructor(html) {
     this.$ = html;
@@ -5,7 +6,7 @@ module.exports = class Scraper {
 
   getAllDays() {
     const foodPlan = [];
-    for (let i = 1; i < 6; i++) {
+    for (let i = 1; i < 6; i += 1) {
       foodPlan.push(this.scrapeDay(i));
     }
     return foodPlan;
@@ -15,11 +16,12 @@ module.exports = class Scraper {
     const foodPlan = { day: '', date: '', food: [] };
     foodPlan.day = this.getDay(day);
     foodPlan.date = this.getDate(day);
-    for (let i = 1; i < 10; i++) {
-      foodPlan.food.push(this.getMealInfo(day, i));
+    for (let i = 1; i < 10; i += 1) {
+      foodPlan.food.push(this.getMeal(day, i));
     }
     return foodPlan;
   }
+
 
   domFoodSelector(day, mealClass) {
     return `.food-plan:nth-of-type(${day}) .food-category:nth-of-type(${mealClass})`;
@@ -39,7 +41,7 @@ module.exports = class Scraper {
     const category = this.getTextOfDom(`${mealSelector} .category-name`);
     mealObj.type = category;
     mealObj.meal = [];
-    for (let i = 0; i < this.$(`${mealSelector} tbody`).children().length; i++) {
+    for (let i = 0; i < this.$(`${mealSelector} tbody`).children().length; i += 1) {
       const meal = this.getTextOfDom(`${mealSelector} tr:nth-of-type(${i + 1}) .field-name-field-description`);
       const costs = this.getTextOfDom(`${mealSelector} tr:nth-of-type(${i + 1}) .field-name-field-price-students`);
       mealObj.meal.push({
@@ -48,12 +50,6 @@ module.exports = class Scraper {
       });
     }
     return mealObj;
-  }
-
-  getMealInfo(day, mealClass) {
-    const mealInfo = this.getMeal(day, mealClass);
-    // mealInfo.costs = this.getCost(day, mealClass);
-    return mealInfo;
   }
 
   getDay(x) { return this.$(`.tabs li:nth-of-type(${x}) .tab-title`).text(); }
