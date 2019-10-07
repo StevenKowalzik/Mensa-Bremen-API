@@ -4,8 +4,8 @@ module.exports = class Scraper {
   }
 
   getAllDays() {
-    let foodPlan = [];
-    for (var i = 1; i < 6; i++) {
+    const foodPlan = [];
+    for (let i = 1; i < 6; i++) {
       foodPlan.push(this.scrapeDay(i));
     }
     return foodPlan;
@@ -37,14 +37,14 @@ module.exports = class Scraper {
     const mealObj = {};
     const mealSelector = this.domFoodSelector(day, mealClass);
     const category = this.getTextOfDom(`${mealSelector} .category-name`);
-    mealObj["type"] = category;
-    mealObj["meal"] = [];
-    for (var i = 0; i < this.$(`${mealSelector} tbody`).children().length; i++) {
-      const meal = this.getTextOfDom(`${mealSelector} tr:nth-of-type(${i+1}) .field-name-field-description`);
-      const costs = this.getTextOfDom(`${mealSelector} tr:nth-of-type(${i+1}) .field-name-field-price-students`);
-      mealObj["meal"].push({
-        "name": meal,
-        "costs": costs
+    mealObj.type = category;
+    mealObj.meal = [];
+    for (let i = 0; i < this.$(`${mealSelector} tbody`).children().length; i++) {
+      const meal = this.getTextOfDom(`${mealSelector} tr:nth-of-type(${i + 1}) .field-name-field-description`);
+      const costs = this.getTextOfDom(`${mealSelector} tr:nth-of-type(${i + 1}) .field-name-field-price-students`);
+      mealObj.meal.push({
+        name: meal,
+        costs,
       });
     }
     return mealObj;
@@ -52,12 +52,11 @@ module.exports = class Scraper {
 
   getMealInfo(day, mealClass) {
     const mealInfo = this.getMeal(day, mealClass);
-    //mealInfo.costs = this.getCost(day, mealClass);
+    // mealInfo.costs = this.getCost(day, mealClass);
     return mealInfo;
   }
 
   getDay(x) { return this.$(`.tabs li:nth-of-type(${x}) .tab-title`).text(); }
 
   getDate(x) { return this.$(`.tabs li:nth-of-type(${x}) .tab-date`).text(); }
-
 };

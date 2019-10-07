@@ -3,7 +3,13 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
+    "lint": "eslint .",
     "dev": "nodemon server.js --exec ./node_modules/.bin/babel-node"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint"
+    }
   },
   "dependencies": {
     "body-parser": "~1.18.3",
@@ -22,6 +28,7 @@
     "eslint": "^5.14.1",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-plugin-import": "^2.16.0",
+    "husky": "^3.0.8",
     "nodemon": "^1.18.10"
   }
 }
