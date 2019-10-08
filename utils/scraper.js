@@ -7,19 +7,27 @@ module.exports = class Scraper {
   getAllDays() {
     const foodPlan = [];
     for (let i = 1; i < 6; i += 1) {
-      foodPlan.push(this.scrapeDay(i));
+      let food = this.scrapeDay(i)
+      if(food){
+        foodPlan.push(food);
+      }
     }
     return foodPlan;
   }
 
   scrapeDay(day = 1) {
-    const foodPlan = { day: '', date: '', food: [] };
-    foodPlan.day = this.getDay(day);
-    foodPlan.date = this.getDate(day);
-    for (let i = 1; i < 10; i += 1) {
-      foodPlan.food.push(this.getMeal(day, i));
+    try {
+      const foodPlan = { day: '', date: '', food: [] };
+      foodPlan.day = this.getDay(day);
+      foodPlan.date = this.getDate(day);
+      for (let i = 1; i < 10; i += 1) {
+        foodPlan.food.push(this.getMeal(day, i));
+      }
+      return foodPlan;
+    } catch (error) {
+      return null
     }
-    return foodPlan;
+ 
   }
 
 
