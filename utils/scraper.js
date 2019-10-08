@@ -7,8 +7,8 @@ module.exports = class Scraper {
   getAllDays() {
     const foodPlan = [];
     for (let i = 1; i < 6; i += 1) {
-      let food = this.scrapeDay(i)
-      if(food){
+      const food = this.scrapeDay(i);
+      if (food) {
         foodPlan.push(food);
       }
     }
@@ -25,9 +25,8 @@ module.exports = class Scraper {
       }
       return foodPlan;
     } catch (error) {
-      return null
+      return null;
     }
- 
   }
 
 
