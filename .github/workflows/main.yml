@@ -10,6 +10,6 @@ jobs:
     steps:
     - name: Run Linting
       run: |
-        npm lint
+        npm run lint
         echo Add other actions to build,
         echo test, and deploy your project.
