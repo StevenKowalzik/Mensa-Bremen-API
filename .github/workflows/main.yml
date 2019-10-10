@@ -1,0 +1,15 @@
+name: CI
+
+on: [push]
+
+jobs:
+  test:
+
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Run Linting
+      run: |
+        npm lint
+        echo Add other actions to build,
+        echo test, and deploy your project.
