@@ -50,7 +50,9 @@ module.exports = class Scraper {
     mealObj.meal = [];
     for (let i = 0; i < this.$(`${mealSelector} tbody`).children().length; i += 1) {
       const meal = this.getTextOfDom(`${mealSelector} tr:nth-of-type(${i + 1}) .field-name-field-description`);
-      const costs = this.getTextOfDom(`${mealSelector} tr:nth-of-type(${i + 1}) .field-name-field-price-students`);
+      const costs = {};
+      costs.a = this.getTextOfDom(`${mealSelector} tr:nth-of-type(${i + 1}) .field-name-field-price-students`);
+      costs.b = this.getTextOfDom(`${mealSelector} tr:nth-of-type(${i + 1}) .field-name-field-price-employees`);
       mealObj.meal.push({
         name: meal,
         costs,
