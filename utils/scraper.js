@@ -45,12 +45,20 @@ module.exports = class Scraper {
   getMeal(day, mealClass) {
     const mealObj = {};
     const mealSelector = this.domFoodSelector(day, mealClass);
-    const category = this.getTextOfDom(`${mealSelector} .category-name`);
-    mealObj.type = category;
+    let category = this.getTextOfDom(`${mealSelector} .category-name`);
+    mealObj.type = category.replace('  ', ' ');
+    const categoryArray = category.split('');
+    if (categoryArray[categoryArray.length - 1] === ' ') categoryArray[category.length - 1] = '';
+    category = categoryArray.join('');
     mealObj.meal = [];
     for (let i = 0; i < this.$(`${mealSelector} tbody`).children().length; i += 1) {
-      const meal = this.getTextOfDom(`${mealSelector} tr:nth-of-type(${i + 1}) .field-name-field-description`);
-      const costs = this.getTextOfDom(`${mealSelector} tr:nth-of-type(${i + 1}) .field-name-field-price-students`);
+      let meal = this.getTextOfDom(`${mealSelector} tr:nth-of-type(${i + 1}) .field-name-field-description`).replace('  ', ' ');
+      const mealArray = meal.split('');
+      if (mealArray[mealArray.length - 1] === ' ') mealArray[mealArray.length - 1] = '';
+      meal = mealArray.join('');
+      const costs = {};
+      costs.a = this.getTextOfDom(`${mealSelector} tr:nth-of-type(${i + 1}) .field-name-field-price-students`);
+      costs.b = this.getTextOfDom(`${mealSelector} tr:nth-of-type(${i + 1}) .field-name-field-price-employees`);
       mealObj.meal.push({
         name: meal,
         costs,
