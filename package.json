@@ -2,8 +2,8 @@
   "name": "Mensa-reader-bremen",
   "version": "0.0.1",
   "scripts": {
-    "lint": "eslint .",
-    "dev": "nodemon server.js --exec ./node_modules/.bin/babel-node"
+    "lint": "eslint src/.",
+    "dev": "nodemon src/server.js --exec ./node_modules/.bin/babel-node"
   },
   "husky": {
     "hooks": {
