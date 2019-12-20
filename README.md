@@ -1,4 +1,7 @@
 # Uni Bremen Mensa API
+
+[![Greenkeeper badge](https://badges.greenkeeper.io/StevenKowalzik/Mensa-Bremen-API.svg)](https://greenkeeper.io/)
+
 This is an API that scrapes the Studentenwerk Bremen website and returns the foodplan as JSON.
 
 ### Endpoints
