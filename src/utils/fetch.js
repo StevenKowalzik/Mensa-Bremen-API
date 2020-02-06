@@ -6,7 +6,7 @@ const cache = new Cache();
 
 const options = {
   uri: 'https://www.stw-bremen.de/de/essen-trinken/uni-mensa',
-  transform: body => cheerio.load(body),
+  transform: (body) => cheerio.load(body),
 };
 
 async function fetch() {
