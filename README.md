@@ -18,4 +18,4 @@ Returns the foodplan of the day :day's after today. So mensa.legacymode.de/api/0
 If you want to Contribute just send a Pull request or write me an email.
 
 ### Demo
-The API is online at _https://legacymo.de/v2/api/_.
+The API is online at _api.mensa.legacymo.de/_.
