@@ -2,7 +2,9 @@
 
 
 
-This is an API that scrapes the Studentenwerk Bremen website and returns the foodplan as JSON.
+This is an API that scrapes the Studentenwerk Bremen website and returns the foodplan as JSON. 
+
+*Since im not actively studying at the University of Bremen anymore feel free to message me about helping or maintaining this project.*
 
 ### Endpoints
 
