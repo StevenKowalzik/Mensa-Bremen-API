@@ -29,7 +29,6 @@ module.exports = class Scraper {
     }
   }
 
-
   domFoodSelector(day, mealClass) {
     return `.food-plan:nth-of-type(${day}) .food-category:nth-of-type(${mealClass})`;
   }

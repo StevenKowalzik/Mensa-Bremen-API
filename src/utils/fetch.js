@@ -9,7 +9,7 @@ const options = {
   transform: (body) => cheerio.load(body),
 };
 
-async function fetch() {
+export default async function fetch() {
   const cacheData = cache.get();
   if (cacheData) {
     return cacheData;
@@ -22,5 +22,3 @@ async function fetch() {
     throw new Error('Downloading of the website failed.');
   }
 }
-
-module.exports = fetch;

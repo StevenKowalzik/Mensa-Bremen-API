@@ -20,4 +20,4 @@ app.get('/:day', async (req, res) => {
   return res.status(200).send(scraper.scrapeDay(day));
 });
 
-module.exports = app;
+export default app;
