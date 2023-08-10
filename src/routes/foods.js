@@ -11,7 +11,7 @@ app.get('/', async (req, res) => {
 });
 
 app.get('/:day', async (req, res) => {
-  if (req.params.day < 0 && req.params.day > 5) {
+if (req.params.day < 0 || req.params.day > 5) {
     return res.status(404).send('Das ist kein valider Endpunkt');
   }
   const html = await fetch();
